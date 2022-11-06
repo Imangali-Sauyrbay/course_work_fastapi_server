@@ -1,0 +1,64 @@
+[
+    {
+        "target_class": "Role",
+        "data": [
+            {
+                "name": "user"
+            },
+            {
+                "name": "seller"
+            },
+            {
+                "name": "admin"
+            }
+        ]
+    },
+    {
+        "target_class": "User",
+        "data": [
+            {
+                "created_at": "2022-01-01 00:00:00",
+                "name": "John user",
+                "email": "user@test.com",
+                "password": "12345678"
+            },
+            {
+                "created_at": "2022-01-01 00:00:00",
+                "name": "John seller",
+                "email": "seller@test.com",
+                "password": "12345678",
+                "role_id": 2
+            },
+            {
+                "created_at": "2022-01-01 00:00:00",
+                "name": "John admin",
+                "email": "admin@test.com",
+                "password": "12345678",
+                "role_id": 3
+            }
+        ]
+    },
+    {
+        "target_class": "Category",
+        "data": [
+            {
+                "created_at": "2022-01-01 00:00:00",
+                "name": "Смартфоны"
+            }
+        ]
+    },
+    {
+        "target_class": "Product",
+        "data": [
+            {
+                "created_at": "2022-01-01 00:00:00",
+                "title": "Смартфон Samsung",
+                "description": "Смартфон Samsung",
+                "characteristics": "characteristics:characteristics;characteristics:characteristics;",
+                "price": 955,
+                "currency": "euro",
+                "category_id": 1
+            }
+        ]
+    }
+]

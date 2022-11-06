@@ -20,9 +20,12 @@ class AuthRequestMiddleware(BaseHTTPMiddleware):
         request: Request,
         call_next: RequestResponseEndpoint
     ) -> Response:
-        if request.url.path in ["/docs", "/openapi.json"]:
-            return await call_next(request)
-        if request.method == "OPTIONS":
+
+        if (
+            request.url.path in ["/docs", "/openapi.json"] or
+            not request.url.path.startswith('/api') or
+            request.method == "OPTIONS"
+        ):
             return await call_next(request)
 
         bearer_token = request.headers.get("Authorization")

@@ -1,9 +1,10 @@
 {
   "python.linting.pylintEnabled": true,
-  "python.linting.enabled": true,
+  "python.linting.enabled": false,
   "python.linting.pylintArgs": [
     "--disable=C0111",
     "--extension-pkg-allow-list=pydantic"
   ],
   "python.linting.mypyEnabled": false,
+  "editor.tabSize": 4,
 }

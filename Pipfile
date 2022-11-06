@@ -9,6 +9,10 @@ uvicorn = "*"
 pyyaml = "*"
 pyjwt = "*"
 cryptography = "*"
+sqlalchemy = "*"
+alembic = "*"
+sqlalchemy-seeder = "*"
+mysqlclient = "*"
 
 [dev-packages]
 pylint = "*"
