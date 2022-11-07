@@ -10,9 +10,20 @@ from app.http.middlewares.AuthRequestMiddleware import AuthRequestMiddleware
 
 def main():
     server = FastAPI(debug=True)
-    
-    path_to_static_storage = Path(__file__).parent.parent.parent / 'storage'
-    server.mount('/storage', StaticFiles(directory=path_to_static_storage), name='static storage')
+        
+    path_to_storage = Path(__file__).parent.parent.parent / 'storage'
+    path_to_build= Path(__file__).parent.parent.parent / 'storage' / 'build'
+
+    path_to_assets = path_to_build / 'assets'
+    server.mount('/assets', StaticFiles(directory=path_to_assets, html=False), name='static assets')
+
+    path_to_static = path_to_build / 'static'
+    server.mount('/static', StaticFiles(directory=path_to_static, html=False), name='static files')
+
+    path_to_images = path_to_storage / 'images'
+    server.mount('/images', StaticFiles(directory=path_to_images, html=False), name='static images')
+
+
 
     server.include_router(api_router)
     server.include_router(web_router)
@@ -20,7 +31,7 @@ def main():
     oas = server.openapi()
     server.openapi = lambda: add_oas_auth(oas)
 
-    server.add_middleware(AuthRequestMiddleware)
+    # server.add_middleware(AuthRequestMiddleware)
     server.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],

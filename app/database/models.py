@@ -1,4 +1,4 @@
-from sqlalchemy import Column, BigInteger, DateTime, Integer, String, Boolean, Text, ForeignKey
+from sqlalchemy import Column, Float, DateTime, Integer, String, Boolean, Text, ForeignKey
 from sqlalchemy.orm import declarative_base, relationship
 
 
@@ -19,7 +19,7 @@ class User(Base):
     orders = relationship("Order", back_populates='user')
     addresses = relationship('Address',  back_populates='user')
     bank_accounts = relationship('BankAccount', back_populates='user')
-    products = relationship('Product', secondary='product_seller', back_populates='sellers')
+    products = relationship('ProductSeller', back_populates='seller')
     favs = relationship('Product', secondary='favourites', back_populates='users_fav')
 
 
@@ -38,15 +38,13 @@ class Product(Base):
 
     title = Column(String(255), nullable=False)
     description = Column(String(255), nullable=False)
-    characteristics = Column(Text, nullable=False),
-    price = Column(Integer, nullable=False)
-    currency = Column(String(255), default='usd')
+    characteristics = Column(Text, nullable=False)
 
     images = relationship('Image', secondary='product_image', back_populates='products')
-    sellers = relationship('User', secondary='product_seller', back_populates='products')
+    sellers = relationship('ProductSeller', back_populates='product')
     users_fav = relationship('User', secondary='favourites', back_populates='favs')
 
-    category_id = Column(Integer, ForeignKey('categories.id'))
+    category_id = Column(Integer, ForeignKey('categories.id'), nullable=False)
     category = relationship('Category', back_populates='products')
 
 
@@ -55,7 +53,11 @@ class ProductSeller(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     product_id = Column(Integer, ForeignKey('products.id'))
     seller_id = Column(Integer, ForeignKey('users.id'))
+    price = Column(Float, nullable=False)
     quantity = Column(Integer)
+
+    product = relationship('Product', back_populates='sellers')
+    seller = relationship('User', back_populates='products')
 
 
 class Category(Base):
