@@ -40,7 +40,7 @@ class Product(Base):
     description = Column(String(255), nullable=False)
     characteristics = Column(Text, nullable=False)
 
-    images = relationship('Image', secondary='product_image', back_populates='products')
+    medias = relationship('Media', secondary='product_media', back_populates='products')
     sellers = relationship('ProductSeller', back_populates='product')
     users_fav = relationship('User', secondary='favourites', back_populates='favs')
 
@@ -53,11 +53,15 @@ class ProductSeller(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     product_id = Column(Integer, ForeignKey('products.id'))
     seller_id = Column(Integer, ForeignKey('users.id'))
+    address_id = Column(Integer, ForeignKey('addresses.id'))
+    to_bank_card_id = Column(Integer, ForeignKey('bank_accounts.id'))
     price = Column(Float, nullable=False)
     quantity = Column(Integer)
 
     product = relationship('Product', back_populates='sellers')
     seller = relationship('User', back_populates='products')
+    bank_card=relationship('BankAccount')
+    address = relationship('Address')
 
 
 class Category(Base):
@@ -108,7 +112,6 @@ class Address(Base):
     user = relationship('User', back_populates='addresses')
 
 
-
 class BankAccount(Base):
     __tablename__ = 'bank_accounts'
     
@@ -116,8 +119,8 @@ class BankAccount(Base):
     created_at = Column(DateTime, nullable=False)
 
     holder = Column(String(255))
-    number = Column(String(255))
-    expires = Column(DateTime)
+    number = Column(String(32))
+    expires = Column(String(10))
     cvv = Column(Integer)
 
     user_id = Column(Integer, ForeignKey('users.id'))
@@ -125,17 +128,18 @@ class BankAccount(Base):
 
 
 
-class ProductImage(Base):
-    __tablename__ = 'product_image'
-    image_id = Column(Integer, ForeignKey('images.id'), primary_key=True)
+class ProductMedia(Base):
+    __tablename__ = 'product_media'
+    media_id = Column(Integer, ForeignKey('medias.id'), primary_key=True)
     product_id = Column(Integer, ForeignKey('products.id'), primary_key=True)
 
 
-class Image(Base):
-    __tablename__ = 'images'
+class Media(Base):
+    __tablename__ = 'medias'
     
     id = Column(Integer, primary_key=True, autoincrement=True)
-    path = Column(Integer)
+    name = Column(String(255))
+    content_type = Column(String(255))
     weight = Column(Integer)
 
-    products = relationship('Product', secondary='product_image', back_populates='images')
+    products = relationship('Product', secondary='product_media', back_populates='medias')

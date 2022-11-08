@@ -15,6 +15,7 @@ sqlalchemy-seeder = "*"
 mysqlclient = "*"
 requests = "*"
 fastapi-pagination = "*"
+python-multipart = "*"
 
 [dev-packages]
 pylint = "*"

@@ -20,8 +20,8 @@ def main():
     path_to_static = path_to_build / 'static'
     server.mount('/static', StaticFiles(directory=path_to_static, html=False), name='static files')
 
-    path_to_images = path_to_storage / 'images'
-    server.mount('/images', StaticFiles(directory=path_to_images, html=False), name='static images')
+    path_to_images = path_to_storage / 'media'
+    server.mount('/media', StaticFiles(directory=path_to_images, html=False), name='static images')
 
 
 

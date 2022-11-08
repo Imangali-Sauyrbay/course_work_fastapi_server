@@ -17,7 +17,6 @@ from app.http.jwt_token.auth import decode_and_validate_token
 
 
 async def verify_token(x_token = Header()):
-    print(x_token)
     if not x_token:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Missing access token")
     try:
