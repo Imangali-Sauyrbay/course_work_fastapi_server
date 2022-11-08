@@ -22,6 +22,8 @@ def currency_exchange_rate(from_: str, to_:str):
     return data['rates'][to_.upper()]
 
 def convert_currency(amount, exchange_rate):
+    if amount is None or exchange_rate is None:
+        return None
     return round(amount * exchange_rate if amount >= 1 or exchange_rate >= 1 else amount / exchange_rate, 2)
 
 

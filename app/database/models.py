@@ -37,7 +37,7 @@ class Product(Base):
     created_at = Column(DateTime, nullable=False)
 
     title = Column(String(255), nullable=False)
-    description = Column(String(255), nullable=False)
+    description = Column(Text, nullable=False)
     characteristics = Column(Text, nullable=False)
 
     medias = relationship('Media', secondary='product_media', back_populates='products')
