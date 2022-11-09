@@ -20,17 +20,17 @@ async def verify_token(x_token = Header()):
     if not x_token:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Missing access token")
     try:
-            auth_token = x_token.split(" ")[1].strip()
-            token_payload = decode_and_validate_token(auth_token)
+        auth_token = str(x_token).split(" ")[1].strip()
+        token_payload = decode_and_validate_token(auth_token)
     except (
-            ExpiredSignatureError,
-            ImmatureSignatureError,
-            InvalidAlgorithmError,
-            InvalidAudienceError,
-            InvalidKeyError,
-            InvalidSignatureError,
-            InvalidTokenError,
-            MissingRequiredClaimError,
+        ExpiredSignatureError,
+        ImmatureSignatureError,
+        InvalidAlgorithmError,
+        InvalidAudienceError,
+        InvalidKeyError,
+        InvalidSignatureError,
+        InvalidTokenError,
+        MissingRequiredClaimError,
     ) as error:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token veryfing error")
     else:

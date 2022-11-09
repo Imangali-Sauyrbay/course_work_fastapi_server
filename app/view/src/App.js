@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
+import {Container} from 'react-bootstrap'
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import {api} from './services/ApiService'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-notifications/lib/notifications.css';
+import { NotificationContainer } from 'react-notifications';
+import Header from './components/header'
+import MainPage from './pages/mainPage'
+import SearchPage from './pages/searchPage'
+import {userContext} from './contexts/userContext'
 
 function App() {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {}, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <userContext.Provider value={{ user: user }}>
+      <Header/>
+      <Container>
+        <Routes>
+          <Route path='/' element={<MainPage />}/>
+          <Route path='/search' element={<SearchPage />}/>
+        </Routes>
+      </Container>
+      <NotificationContainer />
+    </userContext.Provider>
   );
 }
 
