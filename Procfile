@@ -1,1 +1,1 @@
-web: gunicorn main:server --worker-class uvicorn.workers.UvicornWorke
+web: gunicorn main:server
