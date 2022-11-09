@@ -9,7 +9,7 @@ from app.http.middlewares.AuthRequestMiddleware import AuthRequestMiddleware
 
 
 def main():
-    server = FastAPI(debug=True)
+    server = FastAPI(debug=False)
         
     path_to_storage = Path(__file__).parent.parent.parent / 'storage'
     path_to_build= Path(__file__).parent.parent.parent / 'storage' / 'build'
