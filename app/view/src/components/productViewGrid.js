@@ -17,11 +17,11 @@ function ProductViewGrid({products}) {
                         if (media?.content_type?.split('/')[0] === 'image') {
                             child = <img
                             className="d-block w-100"
-                            src={"http://127.0.0.1:8000/media/" + media?.name}
+                            src={"/media/" + media?.name}
                             alt=""
                             />
                         } else if (media?.content_type?.split('/')[0] === 'video'){
-                            child = <video src={"http://127.0.0.1:8000/media/" + media?.name} controls/>
+                            child = <video src={"/media/" + media?.name} controls/>
                         }
 
 

@@ -1,7 +1,7 @@
 
 
 class ApiService {
-    constructor(baseUrl = 'http://127.0.0.1:8000/api/') {
+    constructor(baseUrl = '/api/') {
         this.baseUrl = baseUrl
     }
 
